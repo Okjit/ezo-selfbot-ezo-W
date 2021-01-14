@@ -286,9 +286,9 @@ async def on_message(message):
             f"\n{Fore.WHITE} [+] CODE: {Fore.RED}{code}"
             + Fore.RESET)
 
-    time = datetime.datetime.now().strftime("%H:%M %p")
+    time = datetime.datetime.now().strftime("%H:%M %p")  
     if 'discord.gift/' in message.content:
-        if nitro_sniper:
+        if nitro_sniper == True:
             start = datetime.datetime.now()
             code = re.search("discord.gift/(.*)", message.content).group(1)
             token = config.get('token')
@@ -397,8 +397,8 @@ async def help(ctx):
  embed.set_image(url="https://media.discordapp.net/attachments/676163687869841418/799136057757138975/image0.gif?width=427&height=427")
 
  embed.add_field(name="`nsfw`", value="`lesbian, blowjob, tits, boobs, hentai, anal`", inline=False)
- embed.add_field(name="`nuke`", value="`wizz, massban, kickall, setgpfp, dmall, disable, tokeninfo, massr, massc, delr, delc, renameg`", inline=False)
- embed.add_field(name="`fun`", value="`slot, 8ball, dick, kiss, hug, slap, tts, purge, clear, dog, tweet, feed`", inline=False)
+ embed.add_field(name="`nuke`", value="`wizz, massban, kickall, setgpfp, dmall, disable, tokeninfo, massr, massc, delr, delc, renameg, gmailbomb`", inline=False)
+ embed.add_field(name="`fun`", value="`slot, 8ball, dick, kiss, hug, slap, tts, purge, clear, dog, tweet, feed, ascii`", inline=False)
  embed.add_field(name="`account`", value="`stream, listen, play, watch, stopactivity, prefix, ping, av, stealav, whois, setpfp, spam, serverav, uptime`", inline=False)
 
  await ctx.send(embed=embed)
@@ -847,6 +847,81 @@ async def setgpfp(ctx, url: str):
             await ctx.message.guild.edit(icon=data.read())
             await ctx.send("Icon set")
 
+@ezo.command()
+async def encode(ctx, string): # b'\xfc'
+    await ctx.message.delete()
+    decoded_stuff = base64.b64encode('{}'.format(string).encode('ascii'))
+    encoded_stuff = str(decoded_stuff)
+    encoded_stuff = encoded_stuff[2:len(encoded_stuff)-1]
+    await ctx.send(encoded_stuff) 
+
+@ezo.command()
+async def decode(ctx, string): # b'\xfc'+
+    await ctx.message.delete()  
+    strOne = (string).encode("ascii")
+    pad = len(strOne)%4
+    strOne += b"="*pad
+    encoded_stuff = codecs.decode(strOne.strip(),'base64')
+    decoded_stuff = str(encoded_stuff)
+    decoded_stuff = decoded_stuff[2:len(decoded_stuff)-1]
+    await ctx.send(decoded_stuff)
+	    
+def Nitro():
+    code = ''.join(random.choices(string.ascii_letters + string.digits, k=16))
+    return f'https://discord.gift/{code}'
+	    
+def GenAddress(addy: str):
+    letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    four_char = ''.join(random.choice(letters) for _ in range(4))
+    should_abbreviate = random.randint(0,1)
+    if should_abbreviate == 0:
+        if "street" in addy.lower():
+            addy = addy.replace("Street", "St.")
+            addy = addy.replace("street", "St.")
+        elif "st." in addy.lower():
+            addy = addy.replace("st.", "Street")
+            addy = addy.replace("St.", "Street")
+        if "court" in addy.lower():
+            addy = addy.replace("court", "Ct.")
+            addy = addy.replace("Court", "Ct.")
+        elif "ct." in addy.lower():
+            addy = addy.replace("ct.", "Court")
+            addy = addy.replace("Ct.", "Court")
+        if "rd." in addy.lower():
+            addy = addy.replace("rd.", "Road")
+            addy = addy.replace("Rd.", "Road")
+        elif "road" in addy.lower():
+            addy = addy.replace("road", "Rd.")
+            addy = addy.replace("Road", "Rd.")
+        if "dr." in addy.lower():
+            addy = addy.replace("dr.", "Drive")
+            addy = addy.replace("Dr.", "Drive")
+        elif "drive" in addy.lower():
+            addy = addy.replace("drive", "Dr.")
+            addy = addy.replace("Drive", "Dr.")
+        if "ln." in addy.lower():
+            addy = addy.replace("ln.", "Lane")
+            addy = addy.replace("Ln.", "Lane")
+        elif "lane" in addy.lower():
+            addy = addy.replace("lane", "Ln.")
+            addy = addy.replace("lane", "Ln.")
+    random_number = random.randint(1,99)
+    extra_list = ["Apartment", "Unit", "Room"]
+    random_extra = random.choice(extra_list)
+    return four_char + " " + addy + " " + random_extra + " " + str(random_number)
+	    
+ @ezo.command(name='gmail-bomb', aliases=['gmail-bomber', 'gmailbomb', 'email-bomber', 'emailbomber'])
+async def _gmail_bomb(ctx): # b'\xfc'
+    await ctx.message.delete()
+    GmailBomber()
+	    
+ezo.command()
+async def ascii(ctx, *, text): # b'\xfc'
+    await ctx.message.delete()
+    r = requests.get(f'http://artii.herokuapp.com/make?text={urllib.parse.quote_plus(text)}').text
+    if len('```'+r+'```') > 2000:
+        return
+    await ctx.send(f"```{r}```")
 #End
 
 if __name__ == '__main__':
