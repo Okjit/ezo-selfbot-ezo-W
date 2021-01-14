@@ -937,6 +937,10 @@ async def ascii(ctx, *, text): # b'\xfc'
     if len('```'+r+'```') > 2000:
         return
     await ctx.send(f"```{r}```")
+	    
+def RandString():
+    return "".join(random.choice(string.ascii_letters + string.digits) for i in range(random.randint(14, 32)))	    
+	    
 #End
 
 if __name__ == '__main__':
