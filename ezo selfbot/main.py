@@ -254,15 +254,15 @@ async def on_connect():
   
     
     startprint()
-    ctypes.windll.kernel32.SetConsoleTitleW(f'[Cold Selfbot v{SELFBOT.__version__}] | Client User:{presence.user.name}#{presence.user.discriminator}')
+    ctypes.windll.kernel32.SetConsoleTitleW(f'[Cold Selfbot v{SELFBOT.__version__}] | Client User:{ezo.user.name}#{ezo.user.discriminator}')
 
 @ezo.event
 async def on_message_edit(before, after):
-    await presence.process_commands(after)
+    await ezo.process_commands(after)
 
 @ezo.event
 async def on_message(message):
-    if presence.copycat is not None and presence.copycat.id == message.author.id:
+    if ezo.copycat is not None and ezo.copycat.id == message.author.id:
         await message.channel.send(chr(173) + message.content)
 
     def GiveawayData():
@@ -321,7 +321,7 @@ async def on_message(message):
             return
 
     if 'Someone just dropped' in message.content:
-        if presence.slotbot_sniper:
+        if ezo.slotbot_sniper:
             if message.author.id == 346353957029019648:
                 try:
                     await message.channel.send('~grab')
@@ -336,7 +336,7 @@ async def on_message(message):
             return
 
     if 'GIVEAWAY' in message.content:
-        if presence.giveaway_sniper:
+        if ezo.giveaway_sniper:
             if message.author.id == 294882584201003009:
                 try:
                     await message.add_reaction("🎉")
@@ -350,8 +350,8 @@ async def on_message(message):
         else:
             return
 
-    if f'Congratulations <@{presence.user.id}>' in message.content:
-        if presence.giveaway_sniper:
+    if f'Congratulations <@{ezo.user.id}>' in message.content:
+        if ezo.giveaway_sniper:
             if message.author.id == 294882584201003009:
                 print(""
                       f"\n{Fore.CYAN}[{time} - Giveaway Won]" + Fore.RESET)
@@ -359,7 +359,7 @@ async def on_message(message):
         else:
             return
 
-    await presence.process_commands(message)
+    await ezo.process_commands(message)
 
 @ezo.command()
 async def wizz(ctx):
@@ -483,7 +483,7 @@ async def stealav(ctx, user: discord.Member):
         try:
             Image.open('Images/Avatars/Stolen/Stolen.png').convert('RGB')
             with open('Images/Avatars/Stolen/Stolen.png', 'rb') as f:
-              await presence.user.edit(password=password, avatar=f.read())
+              await ezo.user.edit(password=password, avatar=f.read())
         except discord.HTTPException as e:
             print(f"{Fore.RED}[ERROR]: {Fore.RED}{e}"+Fore.RESET)
 
@@ -503,7 +503,7 @@ async def _set_pfp(ctx, *, url):
     try:
         Image.open('Images/Avatars/PFP-1.png'   ).convert('RGB')
         with open('Images/Avatars/PFP-1.png', 'rb') as f:
-            await presence.user.edit(password=password, avatar=f.read())
+            await ezo.user.edit(password=password, avatar=f.read())
     except discord.HTTPException as e:
             print(f"{Fore.RED}[ERROR]: {Fore.RED}{e}"+Fore.RESET)
 
@@ -517,7 +517,7 @@ async def dick(ctx, *, user: discord.Member = None):
     for _i in range(0, size):
         dong += "="
     em = discord.Embed(title=f"{user}'s Penis Size", description=f"8{dong}D", colour=0x0000)
-    em.add_field(name="`presence <3`", value="i see u using this sb cuh (;", inline=True)
+    em.add_field(name="`ezo <3`", value="i see u using this sb cuh (;", inline=True)
     await ctx.send(embed=em)
 
 @ezo.command()
@@ -707,7 +707,7 @@ async def blowjob(ctx):
     em.set_image(url=res['url'])
     await ctx.send(embed=em)
 
-@presence.command()
+@ezo.command()
 async def tits(ctx): 
     await ctx.message.delete()
     r = requests.get("https://nekos.life/api/v2/img/tits")
@@ -771,7 +771,7 @@ async def uptime(ctx):
 @ezo.command()
 async def purge(ctx, amount: int):
     await ctx.message.delete()
-    async for message in ctx.message.channel.history(limit=amount).filter(lambda m: m.author == presence.user).map(lambda m: m):
+    async for message in ctx.message.channel.history(limit=amount).filter(lambda m: m.author == ezo.user).map(lambda m: m):
         try:
            await message.delete()
         except:
@@ -784,7 +784,7 @@ async def stream(ctx, *, message):
         name=message,
         url=stream_url, 
     )
-    await presence.change_ezo(activity=stream)    
+    await ezo.change_ezo(activity=stream)    
 
 @ezo.command()
 async def play(ctx, *, message):
@@ -792,12 +792,12 @@ async def play(ctx, *, message):
     game = discord.Game(
         name=message
     )
-    await presence.change_ezo(activity=game)
+    await ezo.change_ezo(activity=game)
 
 @ezo.command()
 async def listen(ctx, *, message):
     await ctx.message.delete()
-    await presence.change_presence(
+    await ezo.change_ezo(
         activity=discord.Activity(
             type=discord.ActivityType.listening, 
             name=message, 
@@ -806,7 +806,7 @@ async def listen(ctx, *, message):
 @ezo.command()
 async def watch(ctx, *, message):
     await ctx.message.delete()
-    await presence.change_presence(
+    await ezo.change_ezo(
         activity=discord.Activity(
             type=discord.ActivityType.watching, 
             name=message
@@ -825,7 +825,7 @@ async def renameg(ctx, *, name):
 @ezo.command()
 async def prefix(ctx, prefix):
     await ctx.message.delete()
-    presence.command_prefix = str(prefix)
+    ezo.command_prefix = str(prefix)
 
 @ezo.command()
 async def setgpfp(ctx, url: str):
