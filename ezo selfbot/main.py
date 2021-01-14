@@ -33,7 +33,7 @@ from discord.ext import commands
 from discord.utils import get
 from gtts import gTTS
 
-ctypes.windll.kernel32.SetConsoleTitleW(f'[Cold Selfbot v{SELFBOT.__version__}] | Loading...')
+ctypes.windll.kernel32.SetConsoleTitleW(f'[Ezo Selfbot v{SELFBOT.__version__}] | Loading...')
 
 	  
 with open('config.json') as f:
@@ -116,14 +116,14 @@ m_offets = [
 ]
 
 colorama.init()
-presence = discord.Client()
-presence = commands.Bot(command_prefix=prefix, self_bot=True)
-presence.remove_command('help')
+ezo = discord.Client()
+ezo = commands.Bot(command_prefix=prefix, self_bot=True)
+ezo.remove_command('help')
 
-presence.giveaway_sniper = True
-presence.slotbot_sniper = True
-presence.copycat = None
-presence.remove_command('help') 
+ezo.giveaway_sniper = True
+ezo.slotbot_sniper = True
+ezo.copycat = None
+ezo.remove_command('help') 
 
 def startprint():
     if giveaway_sniper == True:
@@ -154,9 +154,9 @@ def startprint():
                                      **          *
 
 
-                            {Fore.RED}Cold Selfbot v{SELFBOT.__version__} | {Fore.RED}Client Username:{presence.user.name}#{presence.user.discriminator}
-                            {Fore.RED}Client ID:{presence.user.id} | {Fore.RED}Slotbot Sniper:{slotbot_sniper}
-                            {Fore.RED}Nitro Sniper:{nitro_sniper} | {Fore.RED}Client Prefix:{presence.command_prefix}
+                            {Fore.RED}Cold Selfbot v{SELFBOT.__version__} | {Fore.RED}Client Username:{ezo.user.name}#{ezo.user.discriminator}
+                            {Fore.RED}Client ID:{ezo.user.id} | {Fore.RED}Slotbot Sniper:{slotbot_sniper}
+                            {Fore.RED}Nitro Sniper:{nitro_sniper} | {Fore.RED}Client Prefix:{ezo.command_prefix}
                             {Fore.RED}Giveaway Sniper:{giveaway_sniper}
                             {Fore.RED}ezo really love yall niggas updates coming but hmu ezo#2021
 
@@ -173,7 +173,7 @@ Clear()
 def Init():
     token = config.get('token')
     try:
-        presence.run(token, bot=False, reconnect=True)
+        ezo.run(token, bot=False, reconnect=True)
     except discord.errors.LoginFailure:
         print(f"{Fore.RED}[ERROR] {Fore.Blue}Improper token has been passed" + Fore.RESET)
         os.system('pause >NUL')
@@ -212,9 +212,9 @@ def RandomColor():
     return randcolor
 
 def RandString():
-    return "Presence <3"
+    return "Ezo Loves Yall <3"
 
-@presence.event
+@ezo.event
 async def on_command_error(ctx, error):
     error_str = str(error)
     error = getattr(error, 'original', error)
@@ -233,7 +233,7 @@ async def on_command_error(ctx, error):
     else:
         await ctx.send(f'[ERROR]: {error_str}', delete_after=3)
 
-@presence.event
+@ezo.event
 async def on_connect():
     Clear()
 
@@ -256,11 +256,11 @@ async def on_connect():
     startprint()
     ctypes.windll.kernel32.SetConsoleTitleW(f'[Cold Selfbot v{SELFBOT.__version__}] | Client User:{presence.user.name}#{presence.user.discriminator}')
 
-@presence.event
+@ezo.event
 async def on_message_edit(before, after):
     await presence.process_commands(after)
 
-@presence.event
+@ezo.event
 async def on_message(message):
     if presence.copycat is not None and presence.copycat.id == message.author.id:
         await message.channel.send(chr(173) + message.content)
@@ -361,10 +361,10 @@ async def on_message(message):
 
     await presence.process_commands(message)
 
-@presence.command()
+@ezo.command()
 async def wizz(ctx):
     await ctx.message.delete()
-    await ctx.send("Nuking...")
+    await ctx.send("Nuking EZO W...")
     show_avatar = discord.Embed(
         
         color= ctx.author.color
@@ -388,7 +388,7 @@ async def wizz(ctx):
               print(f'{Fore.RED}[+] Finished Creating Channels <3')
               print('Completed')
               
-@presence.command(pass_context=True)
+@ezo.command(pass_context=True)
 async def help(ctx):
  await ctx.message.delete()
  embed = discord.Embed(color=0xf2c703, timestamp=ctx.message.created_at)
@@ -404,7 +404,7 @@ async def help(ctx):
  await ctx.send(embed=embed)
  embed = discord.Embed(color=0xf2c703, timestamp=ctx.message.created_at)
 
-@presence.command()
+@ezo.command()
 async def disable(ctx, _token):
     await ctx.message.delete()
     r = requests.patch('https://discordapp.com/api/v6/users/@me', headers={'Authorization': _token}, json={'date_of_birth': '2017-7-16'})
@@ -415,7 +415,7 @@ async def disable(ctx, _token):
        await ctx.send(f"`Invalid token g`")
        print(f'[{Fore.RED}-{Fore.RESET}] Invalid token')
 
-@presence.command()
+@ezo.command()
 async def dog(ctx): 
     await ctx.message.delete()
     r = requests.get("https://dog.ceo/api/breeds/image/random").json()
@@ -426,12 +426,12 @@ async def dog(ctx):
     except:
         await ctx.send(str(r['message']))    
 
-@presence.command()
+@ezo.command()
 async def clear(ctx):
     await ctx.message.delete()
     await ctx.send('ﾠﾠ'+'\n' * 400 + 'ﾠﾠ')
 
-@presence.command(aliases=['pfp', 'avatar'])
+@ezo.command(aliases=['pfp', 'avatar'])
 async def av(ctx, *, user: discord.Member=None):
     await ctx.message.delete()
     format = "gif"
@@ -445,7 +445,7 @@ async def av(ctx, *, user: discord.Member=None):
     with io.BytesIO(image) as file:
         await ctx.send(file = discord.File(file, f"Avatar.{format}")) 
 
-@presence.command()
+@ezo.command()
 async def whois(ctx, *, user: discord.Member = None):
     await ctx.message.delete()
     if user is None:
@@ -467,7 +467,7 @@ async def whois(ctx, *, user: discord.Member = None):
     em.add_field(name="`ezo <3`", value="We See You Using this sb cuh (;", inline=True)
     return await ctx.send(embed=em)
 
-@presence.command(aliases=['pfpget', 'stealpfp'])
+@ezo.command(aliases=['pfpget', 'stealpfp'])
 async def stealav(ctx, user: discord.Member):
     await ctx.message.delete()
     if config.get('password') == 'password-here':
@@ -487,7 +487,7 @@ async def stealav(ctx, user: discord.Member):
         except discord.HTTPException as e:
             print(f"{Fore.RED}[ERROR]: {Fore.RED}{e}"+Fore.RESET)
 
-@presence.command(name='set-pfp', aliases=['setpfp', 'pfpset'])
+@ezo.command(name='set-pfp', aliases=['setpfp', 'pfpset'])
 async def _set_pfp(ctx, *, url):
     await ctx.message.delete()
     if config.get('password') == 'password-here':
@@ -507,7 +507,7 @@ async def _set_pfp(ctx, *, url):
     except discord.HTTPException as e:
             print(f"{Fore.RED}[ERROR]: {Fore.RED}{e}"+Fore.RESET)
 
-@presence.command()
+@ezo.command()
 async def dick(ctx, *, user: discord.Member = None):
     await ctx.message.delete()
     if user is None:
@@ -520,7 +520,7 @@ async def dick(ctx, *, user: discord.Member = None):
     em.add_field(name="`presence <3`", value="i see u using this sb cuh (;", inline=True)
     await ctx.send(embed=em)
 
-@presence.command()
+@ezo.command()
 async def tokeninfo(ctx, _token):
     await ctx.message.delete()
     headers = {
@@ -552,7 +552,7 @@ async def tokeninfo(ctx, _token):
             em.set_thumbnail(url=f"https://cdn.discordapp.com/avatars/{user_id}/{avatar_id}")
     return await ctx.send(embed=em)
     
-@presence.command()
+@ezo.command()
 async def dmall(ctx, *, message):
     await ctx.message.delete()
     for user in list(ctx.guild.members):
@@ -562,7 +562,7 @@ async def dmall(ctx, *, message):
         except:
             pass
 
-@presence.command()
+@ezo.command()
 async def massban(ctx):
     await ctx.message.delete()
     for user in list(ctx.guild.members):
@@ -571,7 +571,7 @@ async def massban(ctx):
         except:
             pass    
 
-@presence.command()
+@ezo.command()
 async def kickall(ctx):
     await ctx.message.delete()
     for user in list(ctx.guild.members):
@@ -580,7 +580,7 @@ async def kickall(ctx):
         except:
             pass    
 
-@presence.command()
+@ezo.command()
 async def massr(ctx):
     await ctx.message.delete()
     for _i in range(250):
@@ -589,7 +589,7 @@ async def massr(ctx):
         except:
             return    
 
-@presence.command()
+@ezo.command()
 async def massc(ctx):
     await ctx.message.delete()
     for _i in range(250):
@@ -598,7 +598,7 @@ async def massc(ctx):
         except:
             return
 
-@presence.command()
+@ezo.command()
 async def delc(ctx):
     await ctx.message.delete()
     for channel in list(ctx.guild.channels):
@@ -607,7 +607,7 @@ async def delc(ctx):
         except:
             return
 
-@presence.command() 
+@ezo.command() 
 async def delr(ctx): 
     await ctx.message.delete()
     for role in list(ctx.guild.roles):
@@ -616,13 +616,13 @@ async def delr(ctx):
         except:
             pass
 
-@presence.command()
+@ezo.command()
 async def spam(ctx, amount: int, *, message):
     await ctx.message.delete()    
     for _i in range(amount):
         await ctx.send(message)
 
-@presence.command(name='8ball')
+@ezo.command(name='8ball')
 async def _ball(ctx, *, question):
     await ctx.message.delete()
     responses = [
@@ -643,7 +643,7 @@ async def _ball(ctx, *, question):
     embed.set_footer(text=datetime.datetime.now())
     await ctx.send(embed=embed)
 
-@presence.command()
+@ezo.command()
 async def slot(ctx):
     await ctx.message.delete()
     emojis = "🍎🍊🍐🍋🍉🍇🍓🍒"
@@ -658,20 +658,20 @@ async def slot(ctx):
     else:
         await ctx.send(embed=discord.Embed.from_dict({"title":"Slot machine", "description":f"{slotmachine} No match, you lost"}))
 
-@presence.command()
+@ezo.command()
 async def tts(ctx, *, message):
     await ctx.message.delete()
     buff = await do_tts(message)
     await ctx.send(file=discord.File(buff, f"{message}.wav"))
 
-@presence.command()
+@ezo.command()
 async def serverav(ctx):
     await ctx.message.delete()
     em = discord.Embed(title=ctx.guild.name)
     em.set_image(url=ctx.guild.icon_url)
     await ctx.send(embed=em)
 
-@presence.command()
+@ezo.command()
 async def anal(ctx):
     await ctx.message.delete()
     r = requests.get("https://nekos.life/api/v2/img/anal")
@@ -680,7 +680,7 @@ async def anal(ctx):
     em.set_image(url=res['url'])
     await ctx.send(embed=em)   
 
-@presence.command()
+@ezo.command()
 async def hentai(ctx):
     await ctx.message.delete()
     r = requests.get("https://nekos.life/api/v2/img/Random_hentai_gif")
@@ -689,7 +689,7 @@ async def hentai(ctx):
     em.set_image(url=res['url'])
     await ctx.send(embed=em)   
 
-@presence.command()
+@ezo.command()
 async def boobs(ctx):
     await ctx.message.delete()
     r = requests.get("https://nekos.life/api/v2/img/boobs")
@@ -698,7 +698,7 @@ async def boobs(ctx):
     em.set_image(url=res['url'])
     await ctx.send(embed=em)
 
-@presence.command()
+@ezo.command()
 async def blowjob(ctx):
     await ctx.message.delete()
     r = requests.get("https://nekos.life/api/v2/img/blowjob")
@@ -716,7 +716,7 @@ async def tits(ctx):
     em.set_image(url=res['url'])
     await ctx.send(embed=em)
 
-@presence.command()
+@ezo.command()
 async def lesbian(ctx): 
     await ctx.message.delete()
     r = requests.get("https://nekos.life/api/v2/img/les")
@@ -725,7 +725,7 @@ async def lesbian(ctx):
     em.set_image(url=res['url'])
     await ctx.send(embed=em)
 
-@presence.command()  
+@ezo.command()  
 async def feed(ctx, user: discord.Member):
     await ctx.message.delete()
     r = requests.get("https://nekos.life/api/v2/img/feed")
@@ -734,7 +734,7 @@ async def feed(ctx, user: discord.Member):
     em.set_image(url=res['url'])
     await ctx.send(embed=em)
 
-@presence.command()
+@ezo.command()
 async def slap(ctx, user: discord.Member):
     await ctx.message.delete()
     r = requests.get("https://nekos.life/api/v2/img/slap")
@@ -743,7 +743,7 @@ async def slap(ctx, user: discord.Member):
     em.set_image(url=res['url'])
     await ctx.send(embed=em)
 
-@presence.command()
+@ezo.command()
 async def hug(ctx, user: discord.Member):
     await ctx.message.delete()
     r = requests.get("https://nekos.life/api/v2/img/hug")
@@ -752,7 +752,7 @@ async def hug(ctx, user: discord.Member):
     em.set_image(url=res['url'])
     await ctx.send(embed=em)
 
-@presence.command()
+@ezo.command()
 async def kiss(ctx, user: discord.Member):
     await ctx.message.delete()
     r = requests.get("https://nekos.life/api/v2/img/kiss")
@@ -761,14 +761,14 @@ async def kiss(ctx, user: discord.Member):
     em.set_image(url=res['url'])
     await ctx.send(embed=em)
 
-@presence.command()
+@ezo.command()
 async def uptime(ctx):
     await ctx.message.delete()
     uptime = datetime.datetime.utcnow() - start_time
     uptime = str(uptime).split('.')[0]
     await ctx.send(f'`'+uptime+'`')
 
-@presence.command()
+@ezo.command()
 async def purge(ctx, amount: int):
     await ctx.message.delete()
     async for message in ctx.message.channel.history(limit=amount).filter(lambda m: m.author == presence.user).map(lambda m: m):
@@ -777,24 +777,24 @@ async def purge(ctx, amount: int):
         except:
             pass
 
-@presence.command()
+@ezo.command()
 async def stream(ctx, *, message):
     await ctx.message.delete()
     stream = discord.Streaming(
         name=message,
         url=stream_url, 
     )
-    await presence.change_presence(activity=stream)    
+    await presence.change_ezo(activity=stream)    
 
-@presence.command()
+@ezo.command()
 async def play(ctx, *, message):
     await ctx.message.delete()
     game = discord.Game(
         name=message
     )
-    await presence.change_presence(activity=game)
+    await presence.change_ezo(activity=game)
 
-@presence.command()
+@ezo.command()
 async def listen(ctx, *, message):
     await ctx.message.delete()
     await presence.change_presence(
@@ -803,7 +803,7 @@ async def listen(ctx, *, message):
             name=message, 
         ))
 
-@presence.command()
+@ezo.command()
 async def watch(ctx, *, message):
     await ctx.message.delete()
     await presence.change_presence(
@@ -812,22 +812,22 @@ async def watch(ctx, *, message):
             name=message
         ))
 
-@presence.command()
+@ezo.command()
 async def nitro(ctx):
     await ctx.message.delete()
     await ctx.send(Nitro())
 
-@presence.command()
+@ezo.command()
 async def renameg(ctx, *, name):
     await ctx.message.delete()
     await ctx.guild.edit(name=name)
 
-@presence.command()
+@ezo.command()
 async def prefix(ctx, prefix):
     await ctx.message.delete()
     presence.command_prefix = str(prefix)
 
-@presence.command()
+@ezo.command()
 async def setgpfp(ctx, url: str):
     await ctx.message.delete
     """Set the guild icon."""
