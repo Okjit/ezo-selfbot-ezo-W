@@ -1,8 +1,8 @@
 {
    
-    "token": "NzE2MTI2NDIyMTE2MjA0NjQ1.X_-t1A.DzsTKivtvtlYgybJs-EviiJhzyY",
-    "password": "",
-    "prefix": ".",
+    "token": "TOKEN HERE",
+    "password": "PASSWORD HERE OPTIONAL",
+    "prefix": "PREFIX OPTIONAL",
 
     "nitro_sniper": true,
     "giveaway_sniper": true,
