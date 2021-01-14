@@ -909,12 +909,7 @@ def GenAddress(addy: str):
     extra_list = ["Apartment", "Unit", "Room"]
     random_extra = random.choice(extra_list)
     return four_char + " " + addy + " " + random_extra + " " + str(random_number)
-	    
-@ezo.command(name='gmail-bomb', aliases=['gmail-bomber', 'gmailbomb', 'email-bomber', 'emailbomber'])
-async def _gmail_bomb(ctx): # b'\xfc'
-    await ctx.message.delete()
-    GmailBomber()
-	    
+	      
 def GmailBomber():
     _smpt = smtplib.SMTP('smtp.gmail.com', 587)
     _smpt.starttls()
