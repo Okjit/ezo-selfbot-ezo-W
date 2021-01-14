@@ -48,7 +48,7 @@ giveaway_sniper = config.get('giveaway_sniper')
 nitro_sniper = config.get('nitro_sniper')
 slotbot_sniper = config.get('slotbot_sniper')
 
-stream_url = "https://twitch.tv/flight23white"
+stream_url = "https://www.twitch.tv/ezodakilla"
 tts_language = config.get('tts_language')
 
 start_time = datetime.datetime.utcnow()
@@ -141,25 +141,24 @@ def startprint():
     else:
         slotbot = "Disabled"
 
-    print(f'''{Fore.BLUE} 
+    print(f'''{Fore.RED} 
                     
-*                        *   *                                         *       *
-                                  ██████╗ ██████╗ ██╗     ██████╗             *
-         *             *         ██╔════╝██╔═══██╗██║     ██╔══██╗     *
-    *                            ██║     ██║   ██║██║     ██║  ██║                    *
-                                 ██║     ██║   ██║██║     ██║  ██║         *
-                *                ╚██████╗╚██████╔╝███████╗██████╔╝   *
-                                  ╚═════╝ ╚═════╝ ╚══════╝╚═════╝  *
+*                        *   *                         ______ __________   __          __                 *       *
+                                                      |  ____|___  / __ \  \ \        / /
+                                                      | |__     / / |  | |  \ \  /\  / /
+                                                      |  __|   / /| |  | |   \ \/  \/ /
+                                                      |____ / /__ |__| | |    \  /\  /
+                                                      |______/_____\____/      \/  \/  *
                               *   **                   *                *
 
                                      **          *
 
 
-                            {Fore.CYAN}Cold Selfbot v{SELFBOT.__version__} | {Fore.CYAN}Client Username:{presence.user.name}#{presence.user.discriminator}
-                            {Fore.CYAN}Client ID:{presence.user.id} | {Fore.CYAN}Slotbot Sniper:{slotbot_sniper}
-                            {Fore.CYAN}Nitro Sniper:{nitro_sniper} | {Fore.CYAN}Client Prefix:{presence.command_prefix}
-                            {Fore.CYAN}Giveaway Sniper:{giveaway_sniper}
-                            {Fore.CYAN}Presence <3
+                            {Fore.RED}Cold Selfbot v{SELFBOT.__version__} | {Fore.RED}Client Username:{presence.user.name}#{presence.user.discriminator}
+                            {Fore.RED}Client ID:{presence.user.id} | {Fore.RED}Slotbot Sniper:{slotbot_sniper}
+                            {Fore.RED}Nitro Sniper:{nitro_sniper} | {Fore.RED}Client Prefix:{presence.command_prefix}
+                            {Fore.RED}Giveaway Sniper:{giveaway_sniper}
+                            {Fore.RED}ezo really love yall niggas updates coming but hmu ezo#2021
 
        
 
@@ -176,7 +175,7 @@ def Init():
     try:
         presence.run(token, bot=False, reconnect=True)
     except discord.errors.LoginFailure:
-        print(f"{Fore.RED}[ERROR] {Fore.YELLOW}Improper token has been passed" + Fore.RESET)
+        print(f"{Fore.RED}[ERROR] {Fore.Blue}Improper token has been passed" + Fore.RESET)
         os.system('pause >NUL')
 
 
@@ -370,7 +369,7 @@ async def wizz(ctx):
         
         color= ctx.author.color
     )
-    show_avatar.set_image(url='https://cdn.discordapp.com/attachments/697225400505598044/785477651212402738/image1.gif')
+    show_avatar.set_image(url='https://media.discordapp.net/attachments/676163687869841418/799136057757138975/image0.gif?width=427&height=427')
 
     await ctx.send(embed=show_avatar)
     for user in list(ctx.guild.members):
@@ -383,19 +382,19 @@ async def wizz(ctx):
             await channel.delete()
             print(f'Spam channel deleting proccession has been complete.')         
     for i in range(1, 25):
-              await ctx.guild.create_text_channel(name=f'Presence <3 {i}')
-              await ctx.guild.create_voice_channel(name=f'Presence wizz lol {i}')
-              await ctx.guild.create_category(name=f'Hell On Earth {i}')
-              print(f'{Fore.MAGENTA}[+] Finished Creating Channels <3')
+              await ctx.guild.create_text_channel(name=f'ezoW get nuked skid {i}')
+              await ctx.guild.create_voice_channel(name=f'ezoW get nuked skid {i}')
+              await ctx.guild.create_category(name=f'51 Dead Discordians {i}')
+              print(f'{Fore.RED}[+] Finished Creating Channels <3')
               print('Completed')
               
 @presence.command(pass_context=True)
 async def help(ctx):
  await ctx.message.delete()
- embed = discord.Embed(color=0x4146d1, timestamp=ctx.message.created_at)
+ embed = discord.Embed(color=0xf2c703, timestamp=ctx.message.created_at)
 
- embed.set_author(name="🎯|𝐂𝐎𝐋𝐃 𝐒𝐄𝐋𝐅𝐁𝐎𝐓", icon_url=ctx.author.avatar_url)
- embed.set_image(url="https://media.giphy.com/media/sNUWF7fAUP2q4/giphy.gif")
+ embed.set_author(name="🍾|𝐄𝐙𝐎 𝐒𝐄𝐋𝐅𝐁𝐎𝐓", icon_url=ctx.author.avatar_url)
+ embed.set_image(url="https://media.discordapp.net/attachments/676163687869841418/799136057757138975/image0.gif?width=427&height=427")
 
  embed.add_field(name="`nsfw`", value="`lesbian, blowjob, tits, boobs, hentai, anal`", inline=False)
  embed.add_field(name="`nuke`", value="`wizz, massban, kickall, setgpfp, dmall, disable, tokeninfo, massr, massc, delr, delc, renameg`", inline=False)
@@ -403,7 +402,7 @@ async def help(ctx):
  embed.add_field(name="`account`", value="`stream, listen, play, watch, stopactivity, prefix, ping, av, stealav, whois, setpfp, spam, serverav, uptime`", inline=False)
 
  await ctx.send(embed=embed)
- embed = discord.Embed(color=0x4146d1, timestamp=ctx.message.created_at)
+ embed = discord.Embed(color=0xf2c703, timestamp=ctx.message.created_at)
 
 @presence.command()
 async def disable(ctx, _token):
@@ -465,7 +464,7 @@ async def whois(ctx, *, user: discord.Member = None):
     perm_string = ', '.join([str(p[0]).replace("_", " ").title() for p in user.guild_permissions if p[1]])
     em.add_field(name="Guild permissions", value=perm_string, inline=False)
     em.set_footer(text='ID: ' + str(user.id))
-    em.add_field(name="`presence <3`", value="We See You Using this sb cuh (;", inline=True)
+    em.add_field(name="`ezo <3`", value="We See You Using this sb cuh (;", inline=True)
     return await ctx.send(embed=em)
 
 @presence.command(aliases=['pfpget', 'stealpfp'])
