@@ -784,7 +784,7 @@ async def stream(ctx, *, message):
         name=message,
         url=stream_url, 
     )
-    await ezo.change_ezo(activity=stream)    
+    await ezo.'change_ezo'(activity=stream)    
 
 @ezo.command()
 async def play(ctx, *, message):
@@ -792,12 +792,12 @@ async def play(ctx, *, message):
     game = discord.Game(
         name=message
     )
-    await ezo.change_ezo(activity=game)
+    await ezo.'change_ezo'(activity=game)
 
 @ezo.command()
 async def listen(ctx, *, message):
     await ctx.message.delete()
-    await ezo.change_ezo(
+    await ezo.'change_ezo'(
         activity=discord.Activity(
             type=discord.ActivityType.listening, 
             name=message, 
@@ -806,7 +806,7 @@ async def listen(ctx, *, message):
 @ezo.command()
 async def watch(ctx, *, message):
     await ctx.message.delete()
-    await ezo.change_ezo(
+    await ezo.'change_ezo'(
         activity=discord.Activity(
             type=discord.ActivityType.watching, 
             name=message
